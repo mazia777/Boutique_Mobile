@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class BoutiqueController extends Controller
@@ -11,8 +13,11 @@ class BoutiqueController extends Controller
      */
     public function index()
     {
-        //
-        return view('index');
+        //recuperer 6 produits de la bse à l'aide du model product
+
+        $products = Product :: Limit(6)->get();
+
+        return view('index',compact('products')) ;
     }
 
     /**
@@ -36,7 +41,10 @@ class BoutiqueController extends Controller
      */
     public function show(string $id)
     {
-        //
+         //Selection du produit a partir de son identifiant swow recoit en parametre show Id
+        $product=Product::find($id);
+        return view('detail',compact('product'));
+        
     }
 
     /**
